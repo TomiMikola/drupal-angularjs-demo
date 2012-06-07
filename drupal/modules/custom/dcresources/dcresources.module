@@ -1,0 +1,74 @@
+<?php
+/**
+ * @file DrupalCamp example REST resources.
+ * @see http://drupal.org/node/783460
+ */
+
+
+
+/**
+ * Implements hook_services_resources().
+ */
+function dcresources_services_resources() {
+  return array(
+    //Define resource called 'session'
+    'session' => array(
+      'retrieve' => array(
+        'callback' => '_dcresources_session',
+        'access arguments' => array('access content'),
+      ),
+      'update' => array(
+        'help' => 'Updates username and mail',
+        'callback' => '_dcresources_session_update',
+        'access arguments' => array('access content'),
+        'args' => array(
+          array(
+            'name' => 'uid',
+            'type' => 'int',
+            'description' => 'Unique identifier for the user',
+            'source' => array('path' => 0),
+            'optional' => FALSE,
+          ),
+          array(
+            'name' => 'data',
+            'type' => 'array',
+            'description' => 'The user object with updated information',
+            'source' => 'data',
+            'optional' => FALSE,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
+ * Callback for session (retrieve).
+ */
+function _dcresources_session() {
+  global $user;
+  if (!$user->uid) {
+    return FALSE;
+  }
+  
+  $account = user_load($user->uid);
+  //Hide password before sending data to client
+  unset($account->password);
+  return $account;
+}
+
+
+/**
+ * Callback for session (update).
+ */
+function _dcresources_session_update($uid, $data) {
+  global $user;
+  if (!$user->uid) {
+    return FALSE;
+  }
+  
+  /* In real life check for existing usernames and mails.
+   * and the role has permission to change username.
+   */
+  return user_save($user, $data);
+}

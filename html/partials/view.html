@@ -1,0 +1,10 @@
+<a class="pull-right btn btn-info" ng-click="showEdit()">edit</a>
+
+<h1>{{node.title}}</h1>
+<input type="text" ng-model="node.title" class="ed" style="font-size: 30px; line-height: 36px; width:90%; height: 36px;"/><br/>
+
+<div ng-bind-html-unsafe="node.body.und[0].value" class="rend" style="padding:10px 0;"></div>
+<textarea ng-model="node.body.und[0].value" class="ed" style="width:90%; height:250px;"></textarea><br/>
+
+<button ng-click="update()" class="ed btn btn-success">Save</button>
+

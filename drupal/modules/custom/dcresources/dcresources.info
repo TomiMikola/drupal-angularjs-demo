@@ -1,0 +1,5 @@
+name = DC App REST Resources
+core = 7.x
+package = DrupalCamp
+
+dependencies[] = services

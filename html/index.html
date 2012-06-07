@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" xmlns:ng="http://angularjs.org/" ng-app="DC">
+<head>
+  <meta charset="utf-8">
+  <title>DrupalCamp App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="bootstrap/assets/ico/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+  
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css"/>
+  
+  <style type="text/css">
+    .ed, input.ed {
+      display:none;
+    }
+    .hero-unit {
+      padding: 30px;
+    }
+
+    .toolbar .navbar-fixed-top {
+      top: 30px;
+    }
+
+    .toolbar-drawer .navbar-fixed-top {
+      top: 60px;
+    }
+
+  }
+  </style>
+  
+  <script src="lib/jquery.min.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular/angular-resource.min.js"></script>
+  <script src="lib/angular/angular-cookies.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+  
+</head>
+<body ng-controller="LoginCtrl">
+  
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">DrupalCamp</a>
+          <div ng-show="user.uid" class="pull-right">
+            <a ng-click="logout()" class="btn btn-danger">Sign Out</a>
+          </div>
+          <div ng-hide="user.uid" class="pull-right">
+            <input type="text" ng-model="username" placeholder="Username" style="width:60px;"/> 
+            <input type="password" ng-model="password" placeholder="Password" style="width:60px;"/> 
+            <a ng-click="login()" class="btn btn-success">Sign in</a>
+          </div>
+          <div ng-show="user.uid" class="pull-right">
+            <a class="btn" ng-href="#!/user" class="btn btn-success">
+              <i class="icon-user"></i> {{user.name}}
+            </a>
+          </div>
+          <!--
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Navigation</li>
+              <li><a href="#!/list">Articles</a></li>
+              <li><a href="http://drupalcamp.fi/">Drupal</a></li>
+              <li><a href="http://drupal.org/">Drupal</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>DrupalCamp Helsinki 2012</h1>
+          </div>
+          <div class="row-fluid">
+            <div class="span9">
+              <div ng-view></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; DrupalCamp Helsinki 2012</p>
+      </footer>
+
+    </div>
+  
+</body>
+</html>
